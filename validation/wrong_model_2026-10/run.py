@@ -44,9 +44,9 @@ def figures():
 
     specs = {
         "illustration_model_on_photo": ("photo", (300, 120, 556, 376),
-            [("Input", "nearest"), ("Photo model", "photo-x4"), ("Illustration model", "illustration-x4"), ("Ground truth", "original")]),
+            [("Input", "nearest"), ("Real-ESRGAN photo", "photo-x4"), ("Real-ESRGAN anime", "illustration-x4"), ("Ground truth", "original")]),
         "photo_models_on_illustration": ("illustration", (480, 360, 736, 616),
-            [("Input", "nearest"), ("Illustration model", "illustration-x4"), ("Photo model", "photo-x4"),
+            [("Input", "nearest"), ("Real-ESRGAN anime", "illustration-x4"), ("Real-ESRGAN photo", "photo-x4"),
              ("LDSR", "ldsr"), ("SeedVR2", "seedvr2"), ("Ground truth", "original")]),
         "clean_model_on_jpeg": ("photo_jpeg", (300, 120, 556, 376),
             [("JPEG input", "nearest"), ("SwinIR, clean-trained", "swinir-classical-x4"),

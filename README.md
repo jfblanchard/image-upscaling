@@ -1,6 +1,6 @@
 # Image Upscaling
 
-Four decades of image upscaling on the same images, from interpolation to GANs, transformers and diffusion. Includes a local batch tool and a hosted demo.
+Image upscaling from classic interpolation (1979) to today's GANs, transformers and diffusion models, all run on the same images. Includes a local batch tool and a web demo.
 
 <!-- **[Try it here →](https://image-upscaling.pages.dev)** -->
 
@@ -59,7 +59,7 @@ What matters most is the **kind of degradation** a model was trained on, then th
 
 Each experiment has a known ground truth, so failures are measured against it.
 
-**An illustration model on a photo** turns texture and soft gradients into flat painted shapes.
+**An illustration model on a photo.** Real-ESRGAN anime ([x4plus_anime_6B](https://github.com/xinntao/Real-ESRGAN/blob/master/docs/anime_model.md)), trained on anime and line art, turns texture and soft gradients into flat painted shapes. Real-ESRGAN photo (x4plus) is the general model.
 
 ![Illustration model on a photo](assets/wrong_illustration_model_on_photo.jpg)
 
@@ -71,7 +71,7 @@ Each experiment has a known ground truth, so failures are measured against it.
 
 ![Upscaling small text](assets/wrong_generative_models_on_text.jpg)
 
-**Flat illustration** is forgiving: every method does well, and the illustration model gives the cleanest edges.
+**Flat illustration** is forgiving: every method does well, and Real-ESRGAN anime gives the cleanest edges.
 
 ![Photo models on an illustration](assets/wrong_photo_models_on_illustration.jpg)
 
