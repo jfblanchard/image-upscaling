@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image Upscaler</title>
+  <meta name="description" content="Upscale images 2x or 4x with Real-ESRGAN, a deep learning super-resolution model." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Image Upscaler</h1>
+      <p class="lede">Upscale photos and illustrations 2x or 4x with Real-ESRGAN, a deep learning super-resolution model running on a cloud GPU.</p>
+    </header>
+
+    <section class="panel" id="input-panel">
+      <label id="dropzone" for="file">
+        <input type="file" id="file" accept="image/png,image/jpeg,image/webp" hidden />
+        <span class="dz-title">Drop an image here, or click to choose</span>
+        <span class="dz-hint">PNG, JPEG or WebP · up to 2000 px on the long side · 15 MB</span>
+      </label>
+
+      <div id="options">
+        <fieldset>
+          <legend>Model</legend>
+          <div class="seg" role="radiogroup">
+            <input type="radio" name="model" id="m-photo-x2" value="photo-x2" />
+            <label for="m-photo-x2">Photo 2x</label>
+            <input type="radio" name="model" id="m-photo-x4" value="photo-x4" checked />
+            <label for="m-photo-x4">Photo 4x</label>
+            <input type="radio" name="model" id="m-illustration-x4" value="illustration-x4" />
+            <label for="m-illustration-x4">Illustration 4x</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Output</legend>
+          <div class="seg" role="radiogroup">
+            <input type="radio" name="format" id="f-png" value="png" checked />
+            <label for="f-png">PNG</label>
+            <input type="radio" name="format" id="f-jpeg" value="jpeg" />
+            <label for="f-jpeg">JPEG</label>
+          </div>
+        </fieldset>
+        <button id="go" disabled>Upscale</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" id="result-panel" hidden>
+      <div id="compare">
+        <img id="after" alt="Upscaled image" />
+        <img id="before" alt="Original image" />
+        <div id="divider"><span></span></div>
+        <span class="tag tag-left">Original</span>
+        <span class="tag tag-right">Upscaled</span>
+        <input type="range" id="slider" min="0" max="100" value="50" aria-label="Comparison position" />
+      </div>
+      <div id="result-bar">
+        <span id="meta"></span>
+        <a id="download" class="button" download>Download</a>
+      </div>
+    </section>
+
+    <section class="notes">
+      <h2>About</h2>
+      <p>Real-ESRGAN is trained on synthetically degraded images, so it removes blur, noise and JPEG artifacts while it enlarges. The photo models suit real-world images; the illustration model keeps line art and flat color clean.</p>
+      <p>Large images are processed in overlapping tiles, so memory stays bounded regardless of input size. Uploaded images are processed in memory and not stored.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a href="https://github.com/jfblanchard/image-upscaling" target="_blank" rel="noopener">github.com/jfblanchard/image-upscaling</a>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

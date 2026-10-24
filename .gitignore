@@ -1,0 +1,16 @@
+
+# generated: hermes activity stamp (central-planning post-commit)
+.hermes/activity.log
+.idea/
+.ipynb_checkpoints/
+.venv/
+vendor/
+weights/
+bench_out/
+validation/*/data/*.png
+__pycache__/
+validation/*/data/**/*.png
+validation/*/data/*.log
+validation/*/data/src/
+PROJECT_STATUS.md
+.hermes/

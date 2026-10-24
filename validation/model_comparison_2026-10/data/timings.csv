@@ -1,0 +1,17 @@
+method,image,seconds
+realesrgan,butterfly,0.32
+realesrgan,cat,0.31
+realesrgan,leaves,0.30
+realesrgan,timer,0.30
+ldsr-50,butterfly,6.65
+ldsr-50,cat,6.79
+ldsr-50,leaves,6.82
+ldsr-50,timer,6.72
+ldsr-100,butterfly,11.94
+ldsr-100,cat,11.95
+ldsr-100,leaves,12.12
+ldsr-100,timer,12.13
+swinir,butterfly,2.18
+swinir,cat,2.14
+swinir,leaves,2.17
+swinir,timer,2.18
