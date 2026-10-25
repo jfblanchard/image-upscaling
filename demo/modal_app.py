@@ -35,6 +35,7 @@ ALLOWED_ORIGINS = [
 
 image = (
     modal.Image.debian_slim(python_version="3.11")
+    .apt_install("curl")
     .pip_install("torch==2.5.1", "spandrel==0.4.1", "pillow==11.0.0", "numpy<2.2", "fastapi[standard]==0.115.6")
     .run_commands(
         "mkdir -p /weights",
