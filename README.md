@@ -1,12 +1,12 @@
 # Image Upscaling
 
-Image upscaling from classic interpolation (1979) to today's GANs, transformers and diffusion models, all run on the same images. Includes a local batch tool and a web demo.
+This is a comparison of different image upscaling techniques from traditional interpolation to today's GANs, transformers and diffusion models.  Shows all run on the same images. Includes a local batch tool and a web demo.
 
 <!-- **[Try it here →](https://image-upscaling.pages.dev)** -->
 
 ![Butterfly wing, 4x upscale comparison](assets/compare_butterfly.jpg)
 
-Each test image is a 1024×1024 crop from one of my photos, downscaled 4x to 256×256 and then upscaled back. In every figure, **Input** is the small image enlarged with plain pixel repetition, so you see what the model was given. **Ground truth** is the full-resolution crop, so every result can be checked against what the camera actually captured.
+Each test image is a 1024×1024 crop from a photo, downscaled 4x to 256×256 and then upscaled back. In every figure, **Input** is the small image enlarged with plain pixel repetition, so you see what the model was given. **Ground truth** is the full-resolution crop, so every result can be checked against what the camera actually captured.
 
 ## From interpolation to diffusion
 
@@ -22,7 +22,7 @@ Each test image is a 1024×1024 crop from one of my photos, downscaled 4x to 256
 | [LDSR](https://huggingface.co/CompVis/ldm-super-resolution-4x-openimages), 100 steps | 2021 | Latent diffusion | 12 s | 32.6 dB |
 | [SeedVR2](https://huggingface.co/ByteDance-Seed/SeedVR2-3B) 3B | 2025 | One-step diffusion transformer | 6 s | 31.3 dB |
 
-GPU times on an RTX 3060. All learned models here are permissively licensed (BSD-3 or Apache-2.0).
+GPU times on my local RTX 3060. All learned models here are permissively licensed (BSD-3 or Apache-2.0).
 
 **Classical methods** can only redistribute the pixels they are given. Each step up the table trades blockiness for blur; sharpening restores apparent edges but adds halos.
 
