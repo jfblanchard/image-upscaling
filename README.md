@@ -75,6 +75,29 @@ Each experiment has a known ground truth, so failures are measured against it.
 
 ![Photo models on an illustration](assets/wrong_photo_models_on_illustration.jpg)
 
+## Repairing damaged photos
+
+Restoration is a different job from upscaling: remove noise, compression, blur or scratches without changing the size. Each clean 512×512 crop was damaged in a known way, then repaired.
+
+| Damage | Classical | Task-specific network | SeedVR2 | Mean PSNR: damaged → best |
+|---|---|---|---|---|
+| High-ISO noise | Non-local means | [SCUNet](https://github.com/cszn/SCUNet) | Invents colored texture | 21.5 → 29.3 dB |
+| JPEG, quality 15 | Bilateral filter | [FBCNN](https://github.com/jiaxi-jiang/FBCNN) | Invents detail | 33.1 → 35.8 dB |
+| Motion blur | Wiener, given the exact blur | [FFTformer](https://github.com/kkkls/FFTformer) | Sharpens, little recovery | 31.5 → 35.4 dB |
+| Scratches and dust | Telea inpaint | [LaMa](https://github.com/advimman/lama) | Keeps them | 20.6 → 35.8 dB |
+
+A small network trained for one kind of damage wins every case, in 1.5 s or less. The generative upscaler treats damage as content: it sharpens scratches instead of removing them.
+
+![Denoising](assets/restore_noise.jpg)
+![Motion blur](assets/restore_blur.jpg)
+![Scratches](assets/restore_scratches.jpg)
+
+**An old print** combines soft focus, grain, scratches and JPEG. Chaining a denoiser and an inpainter recovers the most; scratch removal needs a mask of where the damage is, painted by hand or detected.
+
+![Old print](assets/restore_old_print.jpg)
+
+For a damaged photo that also needs enlarging: repair first, then upscale.
+
 ## Gallery
 
 Creative Commons images, each a 1024×1024 crop downscaled to 256×256 and upscaled 4x. Credits in [CREDITS.md](CREDITS.md).
@@ -106,6 +129,7 @@ uv pip install --python .venv/bin/python diffusers transformers accelerate spand
 .venv/bin/python src/upscale.py photo.jpg -m swinir-x4            # SwinIR real-world 4x
 .venv/bin/python src/upscale.py small.png -m ldsr --steps 50      # latent diffusion
 .venv/bin/python src/upscale.py photo.jpg -m lanczos              # classical baseline, CPU
+.venv/bin/python src/upscale.py noisy.jpg -m denoise              # repair at same size: denoise, dejpeg, deblur
 ```
 
 SeedVR2 runs through [ComfyUI-SeedVR2](https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler), as a ComfyUI node or its standalone CLI.
@@ -114,7 +138,7 @@ SeedVR2 runs through [ComfyUI-SeedVR2](https://github.com/numz/ComfyUI-SeedVR2_V
 
 | Path | Contents |
 |---|---|
-| `src/upscale.py` | Local batch upscaler: classical interpolation, Real-ESRGAN, SwinIR and LDSR, tiled for any image size |
+| `src/upscale.py` | Local batch tool: classical interpolation, Real-ESRGAN, SwinIR, LDSR, plus denoise, JPEG and deblur repair; tiled for any image size |
 | `demo/` | Web demo: Cloudflare Pages front end, GPU inference on Modal, rate limited (deployment in progress) |
 | `validation/` | Benchmark scripts, setup, raw timings and PSNR |
 | `research/` | Survey of current upscaling models and their licenses |

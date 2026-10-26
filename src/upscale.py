@@ -5,6 +5,7 @@
   python src/upscale.py art.png -m illustration-x4
   python src/upscale.py small.png -m ldsr --steps 50       # diffusion, slow
   python src/upscale.py photo.jpg -m lanczos               # classical baseline, CPU
+  python src/upscale.py noisy.jpg -m denoise               # restoration, same size: denoise, dejpeg, deblur
 
 Outputs are written as <name>_<model>.png. Existing outputs are skipped.
 """
@@ -32,6 +33,11 @@ WEIGHTS = {
     "swinir-x4": "https://github.com/JingyunLiang/SwinIR/releases/download/v0.0/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth",
     # SwinIR-M classical 4x: trained on clean bicubic downscaling only, Apache-2.0
     "swinir-classical-x4": "https://github.com/JingyunLiang/SwinIR/releases/download/v0.0/001_classicalSR_DF2K_s64w8_SwinIR-M_x4.pth",
+    # Restoration at 1x
+    "denoise": "https://github.com/cszn/KAIR/releases/download/v1.0/scunet_color_real_psnr.pth",  # SCUNet, Apache-2.0
+    "denoise-gan": "https://github.com/cszn/KAIR/releases/download/v1.0/scunet_color_real_gan.pth",
+    "dejpeg": "https://github.com/jiaxi-jiang/FBCNN/releases/download/v1.0/fbcnn_color.pth",  # FBCNN, Apache-2.0
+    "deblur": "https://github.com/kkkls/FFTformer/releases/download/pretrain_model/fftformer_GoPro.pth",  # FFTformer, MIT
 }
 LDSR_REPO = "CompVis/ldm-super-resolution-4x-openimages"  # Apache-2.0
 CLASSICAL = {
