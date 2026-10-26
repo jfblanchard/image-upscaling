@@ -36,7 +36,7 @@ GPU times on my local RTX 3060. All learned models here are permissively license
 
 **Observations**
 
-- **Real-ESRGAN** is fast and clean. Edges and text come out crisp, but fine texture such as fur and leaf surface is smoothed.
+- **Real-ESRGAN** is fast and clean. Strong edges and large markings come out crisp, but fine texture such as fur and leaf surface is smoothed, and small text breaks apart (see [Using the wrong model](#using-the-wrong-model)).
 - **SwinIR** looks much like Real-ESRGAN on these photos, at 7x the cost.
 - **LDSR** gives natural photographic texture, at the highest cost. 50 steps looks the same as 100 at half the time.
 - **SeedVR2** recovers the most convincing detail, as in the wing scales and fur, at half LDSR's time.
@@ -67,7 +67,9 @@ Each experiment has a known ground truth, so failures are measured against it.
 
 ![Clean-trained model on a JPEG](assets/wrong_clean_model_on_jpeg.jpg)
 
-**Small text** (6 px tall in the input) exposes invented detail. Real-ESRGAN renders crisp characters with the wrong digits; LDSR garbles a few letters; SeedVR2 reads it almost perfectly. Bicubic is blurry but never wrong.
+**Small text** (6 px tall in the input) exposes invented detail. Real-ESRGAN sharpens each stroke into broken, unreadable shapes; LDSR garbles a few letters; SeedVR2 reads it almost perfectly. Bicubic is blurry but never wrong.
+
+The difference is what each model knows. Real-ESRGAN is a small network (17M parameters) that looks only at a few pixels around each point, so it sharpens strokes without knowing they form letters. SeedVR2 is a 3B-parameter transformer trained on a vast amount of images and video, with attention across the whole image: it has effectively learned what letters look like and redraws them. That works when the font is common and the text is plausible; with an unusual font or ambiguous input, the same ability can produce confident, wrong characters (not tested here).
 
 ![Upscaling small text](assets/wrong_generative_models_on_text.jpg)
 
